@@ -1,0 +1,36 @@
+:root {
+  --out-of-dropzone-color: rgba(117, 117, 117, 0.7);
+  --in-dropzone-color: rgb(28, 142, 238);
+  --in-dropzone-color-bg: rgba(28, 142, 238, 0.5);
+}
+
+.dropzone {
+  position: relative;
+  margin: 10px;
+  height: 100%;
+  border: 1px dashed var(--out-of-dropzone-color);
+}
+
+.dropzone.in-dropzone {
+  background-color: var(--in-dropzone-color-bg);
+  border: 2px solid var(--in-dropzone-color);
+}
+
+.dropzone__plus-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display:inline-block;
+
+  width:150px;
+  height:150px;
+
+  background:
+    linear-gradient(var(--out-of-dropzone-color), var(--out-of-dropzone-color)),
+    linear-gradient(var(--out-of-dropzone-color), var(--out-of-dropzone-color)),
+    rgba(0, 0, 0, 0);
+  background-position:center;
+  background-size: 50% 5px, 5px 50%; /*thickness = 2px, length = 50% (25px)*/
+  background-repeat:no-repeat;
+}
