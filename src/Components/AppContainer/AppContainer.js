@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import DropZone from '../DropZone';
+import HereMapService from '../../Services/HereMapService';
 import parseCoordinatesFromJSONFiles from '../../Utils/parseCoordinatesFromJSONFiles';
 import './AppContainer.css';
 
@@ -13,7 +14,10 @@ export default function AppContainer() {
 
   const handleDrop = async (files) => {
     const coordintes = await parseCoordinatesFromJSONFiles(files);
-    console.log(coordintes)
+    const hereMapService = new HereMapService();
+
+    const addresses = await hereMapService.getAddresses(coordintes);
+    console.log(addresses);
   }
 
   return (
