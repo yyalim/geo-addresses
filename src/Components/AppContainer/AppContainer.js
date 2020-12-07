@@ -1,13 +1,14 @@
 import React, { useEffect, useContext } from 'react';
-import { StoreContext, ADD_ADDRESS } from '../Store';
+import { StoreContext, MapContext, ADD_ADDRESS } from '../Store';
 import DropZone from '../DropZone';
 import AddressList from '../AddressList';
-import HereMapService from '../../Services/HereMapService';
+import Map from '../Map';
 import parseCoordinatesFromJSONFiles from '../../Utils/parseCoordinatesFromJSONFiles';
 import './AppContainer.css';
 
 export default function AppContainer() {
   const [state, dispatch] = useContext(StoreContext);
+  const hereMapService = useContext(MapContext);
 
   // prevent drag and drop API outside of JSON reader
   useEffect(() => {
@@ -19,8 +20,8 @@ export default function AppContainer() {
   const handleDrop = async (files) => {
     try {
       const coordintes = await parseCoordinatesFromJSONFiles(files);
-      const hereMapService = new HereMapService();
       const addresses = await hereMapService.getAddresses(coordintes);
+      hereMapService.addBubbles(addresses);
 
       addresses.forEach(address => dispatch({
         type: ADD_ADDRESS,
@@ -41,6 +42,7 @@ export default function AppContainer() {
               : <DropZone onDrop={handleDrop} />
           }
       </div>
+      <Map />
     </div>
   );
 }
