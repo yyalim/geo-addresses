@@ -42,7 +42,7 @@ export default function AppContainer() {
       <div className="places">
         <h1 className="places__heading">Places</h1>
         {isLoading && <LoadingIndicator />}
-        {!isLoading && Object.keys(state.places).length && <AddressList />}
+        {!isLoading && Object.keys(state.places).length > 0 && <AddressList />}
         {!isLoading && !Object.keys(state.places).length && <DropZone onDrop={handleDrop} />}
       </div>
       <Map />
