@@ -1,4 +1,30 @@
-# Getting Started with Create React App
+# Geo Addresses
+
+This application gets address info and points on map from coordinate information using [Here Geocoding API](https://developer.here.com/products/geocoding-and-search)
+
+Coordinate information can be provided from JSON file and format of the data can be found example below.
+
+```JSON
+[
+  {
+    "Name": "John Doe",
+    "Latitude": 52.56222,
+    "Longitude": 13.35125
+  },
+  // ...
+]
+```
+
+In this MVP version it always assumes users providing valid format of JSON data. Because it's using HTML5 drag & drop API it might not be working on older browsers.
+
+Here Map API key provided on `HereMapService.js`. If it is not valid you can change with `API_KEY` constant with yours. `HereMapService` class is a wraps [Here API for JavaScript](https://developer.here.com/documentation/maps/3.1.20.0/dev_guide/index.html) to draw map and get address info with [geocoding](https://developer.here.com/documentation/maps/3.1.20.0/dev_guide/topics/geocoding.html)
+
+`Store` is entry point component which provides simple redux like state management.
+`StoreContext` holds top level state which acts single source of truth.
+`MapContext` holds an instance of `HereMapService` class.
+`DropZone` this component manage UI & behaviour for drag and drop files
+`ParseCoordinatesFromJSONFiles` this function parses JSON file data into applications's memory
+`AppContainer` Layouts components and invokes JSON parsing and geocoding with `handleDrop` function
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -6,6 +32,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install`
+
+Install npm dependencies
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -38,6 +67,11 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Node version
+Node v14.15.1 used while this application being developed
+
+If you have nvm installed on you machine you can run `nvm use` on the project folder. Alternatively you can install it manually.
 
 ## Learn More
 
