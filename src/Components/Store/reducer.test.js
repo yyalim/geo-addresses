@@ -1,7 +1,7 @@
-import reducer, { ADD_ADDRESS } from './reducer';
+import reducer, { ADD_PLACE } from './reducer';
 
 const initialState = {
-  addresses: {
+  places: {
     address_id_1: { lat: 10, long: 20 },
     address_id_2: { lat: 11, long: 21 }
   }
@@ -15,12 +15,12 @@ it('should not change the state if unknown action dispatched', () => {
 
 it('should add new address when ADD_ADDRESS action dispatched', () => {
   const action = {
-    type: ADD_ADDRESS,
+    type: ADD_PLACE,
     payload: { address_id_3: { lat: 12, long: 22 }}
   };
 
   expect(reducer(initialState, action)).toMatchObject({
-    addresses: {
+    places: {
       address_id_1: { lat: 10, long: 20 },
       address_id_2: { lat: 11, long: 21 },
       address_id_3: { lat: 12, long: 22 }

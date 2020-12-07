@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { StoreContext, MapContext, ADD_ADDRESS } from '../Store';
+import { StoreContext, MapContext, ADD_PLACE } from '../Store';
 import DropZone from '../DropZone';
 import AddressList from '../AddressList';
 import Map from '../Map';
@@ -20,12 +20,12 @@ export default function AppContainer() {
   const handleDrop = async (files) => {
     try {
       const coordintes = await parseCoordinatesFromJSONFiles(files);
-      const addresses = await hereMapService.getAddresses(coordintes);
-      hereMapService.addBubbles(addresses);
+      const places = await hereMapService.getPlaces(coordintes);
+      hereMapService.addBubbles(places);
 
-      addresses.forEach(address => dispatch({
-        type: ADD_ADDRESS,
-        payload: { [address.id]: address }
+      places.forEach(place => dispatch({
+        type: ADD_PLACE,
+        payload: { [place.id]: place }
       }));
     } catch(error) {
       alert(error);
@@ -37,7 +37,7 @@ export default function AppContainer() {
       <div className="places">
         <h1 className="places__heading">Places</h1>
           {
-            Object.keys(state.addresses).length
+            Object.keys(state.places).length
               ? <AddressList />
               : <DropZone onDrop={handleDrop} />
           }

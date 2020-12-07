@@ -38,7 +38,7 @@ export default class HereMapService {
     });
   }
 
-  getAddresses(coordinates) {
+  getPlaces(coordinates) {
     return new Promise((resolve, reject) => {
       try {
         const reverseGeocodePromises = coordinates

@@ -9,13 +9,13 @@ export default function AddressList() {
   return (
     <div className="address-list">
       {
-        Object.keys(state.addresses)
-          .map(addressId => (
+        Object.keys(state.places)
+          .map(id => (
             <AddressItem
-              key={addressId}
-              id={addressId}
-              name={state.addresses[addressId].Name}
-              address={state.addresses[addressId].address.label}
+              key={id}
+              id={id}
+              name={state.places[id].Name}
+              address={state.places[id].address.label}
             />
           ))
       }

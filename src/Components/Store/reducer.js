@@ -1,12 +1,12 @@
-export const ADD_ADDRESS = 'ADD_ADDRESS';
+export const ADD_PLACE = 'ADD_PLACE';
 
 export default function reducer (state, action) {
   switch(action.type) {
-    case ADD_ADDRESS:
+    case ADD_PLACE:
       return {
         ...state,
-        addresses: {
-          ...state.addresses,
+        places: {
+          ...state.places,
           ...action.payload
         }
       }

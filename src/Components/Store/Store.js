@@ -3,7 +3,7 @@ import HereMapService from '../../Services/HereMapService';
 import reducer from './reducer';
 
 const initialState = {
-  addresses: {}
+  places: {}
 }
 
 const hereMapService = new HereMapService();
