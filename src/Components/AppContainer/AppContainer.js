@@ -1,7 +1,8 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { StoreContext, MapContext, ADD_PLACE } from '../Store';
 import DropZone from '../DropZone';
 import AddressList from '../AddressList';
+import LoadingIndicator from '../LoadingIndicator';
 import Map from '../Map';
 import parseCoordinatesFromJSONFiles from '../../Utils/parseCoordinatesFromJSONFiles';
 import './AppContainer.css';
@@ -9,6 +10,7 @@ import './AppContainer.css';
 export default function AppContainer() {
   const [state, dispatch] = useContext(StoreContext);
   const hereMapService = useContext(MapContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   // prevent drag and drop API outside of JSON reader
   useEffect(() => {
@@ -19,6 +21,7 @@ export default function AppContainer() {
 
   const handleDrop = async (files) => {
     try {
+      setIsLoading(true);
       const coordintes = await parseCoordinatesFromJSONFiles(files);
       const places = await hereMapService.getPlaces(coordintes);
       hereMapService.addBubbles(places);
@@ -29,6 +32,8 @@ export default function AppContainer() {
       }));
     } catch(error) {
       alert(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -36,11 +41,9 @@ export default function AppContainer() {
     <div className="app-container">
       <div className="places">
         <h1 className="places__heading">Places</h1>
-          {
-            Object.keys(state.places).length
-              ? <AddressList />
-              : <DropZone onDrop={handleDrop} />
-          }
+        {isLoading && <LoadingIndicator />}
+        {!isLoading && Object.keys(state.places).length && <AddressList />}
+        {!isLoading && !Object.keys(state.places).length && <DropZone onDrop={handleDrop} />}
       </div>
       <Map />
     </div>
