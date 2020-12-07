@@ -1,0 +1,4 @@
+.address-list {
+  overflow: auto;
+  max-height: 100%;
+}

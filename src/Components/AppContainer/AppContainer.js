@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { StoreContext, ADD_ADDRESS } from '../Store';
 import DropZone from '../DropZone';
+import AddressList from '../AddressList';
 import HereMapService from '../../Services/HereMapService';
 import parseCoordinatesFromJSONFiles from '../../Utils/parseCoordinatesFromJSONFiles';
 import './AppContainer.css';
@@ -34,7 +35,11 @@ export default function AppContainer() {
     <div className="app-container">
       <div className="places">
         <h1 className="places__heading">Places</h1>
-          { Object.keys(state.addresses).length ? 'list' : <DropZone onDrop={handleDrop} /> }
+          {
+            Object.keys(state.addresses).length
+              ? <AddressList />
+              : <DropZone onDrop={handleDrop} />
+          }
       </div>
     </div>
   );

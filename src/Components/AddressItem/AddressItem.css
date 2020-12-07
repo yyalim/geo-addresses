@@ -1,0 +1,11 @@
+.address-item {
+  background-color: #fff;
+  width: 95%;
+  margin: 10px auto;
+  padding: 20px;
+}
+
+.address-item__heading {
+  margin: 0;
+}
+
