@@ -11,7 +11,11 @@ Coordinate information can be provided from JSON file and format of the data can
     "Latitude": 52.56222,
     "Longitude": 13.35125
   },
-  // ...
+  {
+    "Name": "Max Mustermann",
+    "Latitude": 42.56222,
+    "Longitude": 33.35125
+  }
 ]
 ```
 
@@ -20,13 +24,25 @@ In this MVP version it always assumes users providing valid format of JSON data.
 Here Map API key provided on `HereMapService.js`. If it is not valid you can change with `API_KEY` constant with yours. `HereMapService` class is a wraps [Here API for JavaScript](https://developer.here.com/documentation/maps/3.1.20.0/dev_guide/index.html) to draw map and get address info with [geocoding](https://developer.here.com/documentation/maps/3.1.20.0/dev_guide/topics/geocoding.html)
 
 `Store` is entry point component which provides simple redux like state management.
+
 `StoreContext` holds top level state which acts single source of truth.
+
 `MapContext` holds an instance of `HereMapService` class.
-`DropZone` this component manage UI & behaviour for drag and drop files
-`ParseCoordinatesFromJSONFiles` this function parses JSON file data into applications's memory
-`AppContainer` Layouts components and invokes JSON parsing and geocoding with `handleDrop` function
+
+`DropZone` this component manage UI & behaviour for drag and drop files.
+
+`ParseCoordinatesFromJSONFiles` this function parses JSON file data into applications's memory.
+
+`AppContainer` Layouts components and invokes JSON parsing and geocoding with `handleDrop` function.
+
+`AddressList` component connect to `StoreContext` and lists `AddressItem` regards the state.
+
+`LoadingIndicator` is a component to which will be dipslayed on asynchronous process going on.
+
+`Map` component displays Here Map. It uses `HereMapService` class for functionality.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
